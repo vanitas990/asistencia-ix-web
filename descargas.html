@@ -12,207 +12,67 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     >
     <style>
-      :root {
-        color-scheme: dark;
-        font-family: "Outfit", sans-serif;
-        color: #d1dcd5;
-        background-color: #121c18;
+      :root{color-scheme:dark;font-family:"Inter",sans-serif;color:#fff;background:#090d0b}
+      *{box-sizing:border-box}
+      html{min-height:100%}
+      body{min-height:100vh;margin:0;display:flex;flex-direction:column;overflow-x:hidden;color:#fff;background:transparent;font-family:"Inter",sans-serif}
+      .background-video{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-1;pointer-events:none}
+      .video-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:0;pointer-events:none}
+      .page-wrapper{position:relative;z-index:1;flex:1;width:min(1200px,calc(100% - 48px));max-width:1200px;margin:40px auto;padding:40px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;color:#fff;background:rgba(30,30,30,.4);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.2);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+      .hero-content{display:flex;flex-direction:column;align-items:flex-start}
+      .mark{display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;padding:8px 16px;color:#f3c58f;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:12px;font-size:.85rem;font-weight:700;letter-spacing:.1em}
+      .eyebrow{margin:0 0 12px;color:#f0b875;font-size:.8rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+      h1{margin:0 0 16px;color:#fff;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:800;letter-spacing:-.04em;line-height:1.08}
+      .intro{max-width:520px;margin:0 0 28px;color:#e2e8e4;font-size:1.05rem;line-height:1.7}
+      .download-button{box-sizing:border-box;width:100%;max-width:360px;min-height:58px;padding:16px 24px;display:inline-flex;align-items:center;justify-content:center;gap:12px;border:1px solid rgba(255,255,255,.26);border-radius:14px;background:linear-gradient(135deg,#38a875 0%,#19744f 100%);box-shadow:0 10px 30px rgba(0,0,0,.3);color:#fff;font-size:1rem;font-weight:700;text-align:center;text-decoration:none;transition:transform 180ms ease,filter 180ms ease,box-shadow 180ms ease}
+      .download-button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 14px 34px rgba(0,0,0,.38)}
+      .download-button:focus-visible{outline:3px solid #f0b875;outline-offset:4px}
+      .instructions-panel{width:100%;padding:28px;border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,.06)}
+      .instructions-panel h2{margin:0 0 16px;color:#fff;font-size:1.25rem;font-weight:700}
+      .instructions-panel ol{margin:0;padding-left:22px;color:#e2e8e4;font-size:.95rem;line-height:1.8}
+      .instructions-panel li::marker{color:#f0b875;font-weight:700}
+      .instructions-panel li+li{margin-top:10px}
+      .note{margin:20px 0 0;padding:14px 16px;border-left:3px solid #f0b875;border-radius:0 10px 10px 0;background:rgba(240,184,117,.09);color:#f5d6ad;font-size:.85rem;line-height:1.6}
+      footer{position:relative;z-index:1;width:100%;padding:20px;color:rgba(255,255,255,.72);font-size:.82rem;line-height:1.6;text-align:center}
+      @media(max-width:968px){
+        .page-wrapper{grid-template-columns:1fr;gap:28px}
+        .hero-content{align-items:center;text-align:center}
+        .instructions-panel{max-width:680px;margin:0 auto;text-align:left}
       }
-
-      * {
-        box-sizing: border-box;
+      @media(max-width:768px){
+        .page-wrapper{width:90%;margin-top:20px;margin-bottom:20px;padding:24px;gap:26px;border-radius:16px}
+        h1{font-size:2rem}
+        .intro,.instructions-panel ol{font-size:.95rem}
+        .intro{margin-bottom:24px}
+        .download-button{width:100%;max-width:none}
+        .instructions-panel{padding:20px}
+        .instructions-panel h2{font-size:1.15rem}
       }
-
-      body {
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        background: 
-          radial-gradient(circle at 10% 20%, rgba(34, 74, 58, 0.4), transparent 40%),
-          radial-gradient(circle at 90% 80%, rgba(46, 96, 75, 0.3), transparent 50%),
-          #121c18;
-      }
-
-      /* Estructura a pantalla completa dividida en grid para PC y apilada en móvil */
-      .page-wrapper {
-        flex: 1;
-        width: 100%;
-        min-height: 100vh;
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        align-items: center;
-        gap: 40px;
-        padding: 60px clamp(24px, 6vw, 96px);
-        max-width: 1600px;
-        margin: 0 auto;
-      }
-
-      @media (max-width: 968px) {
-        .page-wrapper {
-          grid-template-columns: 1fr;
-          padding: 40px 20px;
-          gap: 30px;
-          text-align: center;
-        }
-      }
-
-      .hero-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      @media (max-width: 968px) {
-        .hero-content {
-          align-items: center;
-        }
-      }
-
-      .mark {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 16px;
-        margin-bottom: 20px;
-        border: 1px solid rgba(89, 142, 115, 0.3);
-        border-radius: 12px;
-        background: rgba(30, 52, 42, 0.6);
-        color: #8cd3af;
-        font-family: "Fira Code", monospace;
-        font-size: 0.9rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-      }
-
-      .eyebrow {
-        margin: 0 0 12px;
-        color: #d99b5b;
-        font-family: "Fira Code", monospace;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0 0 16px;
-        color: #edf5f0;
-        font-size: clamp(2.5rem, 5vw, 4.2rem);
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-      }
-
-      .intro {
-        max-width: 520px;
-        margin: 0 0 32px;
-        color: #9cb3a5;
-        font-size: 1.05rem;
-        line-height: 1.7;
-      }
-
-      .download-button {
-        min-height: 60px;
-        width: 100%;
-        max-width: 360px;
-        padding: 16px 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        border: none;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #438a6a 0%, #2f614a 100%);
-        box-shadow: 0 10px 30px -6px rgba(47, 97, 74, 0.5);
-        color: #f4fbf7;
-        font-size: 1.05rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 200ms ease;
-      }
-
-      .download-button:hover {
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #4f9c78 0%, #376f55 100%);
-        box-shadow: 0 14px 36px -6px rgba(47, 97, 74, 0.7);
-      }
-
-      .instructions-panel {
-        width: 100%;
-        padding: 32px;
-        border: 1px solid rgba(89, 142, 115, 0.15);
-        border-radius: 24px;
-        background: rgba(22, 36, 30, 0.7);
-        backdrop-filter: blur(12px);
-        text-align: left;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      .instructions-panel h2 {
-        margin: 0 0 16px;
-        color: #edf5f0;
-        font-size: 1.25rem;
-        font-weight: 700;
-      }
-
-      .instructions-panel ol {
-        margin: 0;
-        padding-left: 20px;
-        color: #b5c7bc;
-        font-size: 0.95rem;
-        line-height: 1.8;
-      }
-
-      .instructions-panel li::marker {
-        color: #d99b5b;
-        font-weight: 700;
-      }
-
-      .instructions-panel li + li {
-        margin-top: 8px;
-      }
-
-      .note {
-        margin: 20px 0 0;
-        padding: 14px 16px;
-        border-left: 3px solid #d99b5b;
-        border-radius: 0 10px 10px 0;
-        background: rgba(217, 155, 91, 0.08);
-        color: #e5b27e;
-        font-size: 0.85rem;
-        line-height: 1.6;
-      }
-
-      footer {
-        width: 100%;
-        padding: 24px 20px;
-        text-align: center;
-        color: #728a7c;
-        font-size: 0.82rem;
-        border-top: 1px solid rgba(89, 142, 115, 0.1);
-        background: rgba(14, 23, 19, 0.9);
+      @media(prefers-reduced-motion:reduce){
+        .download-button{transition:none}
+        .download-button:hover{transform:none}
       }
     </style>
   </head>
   <body>
+    <video class="background-video" autoplay loop muted playsinline src="./fondo/descarga.mp4"></video>
+    <div class="video-overlay" aria-hidden="true"></div>
     <div class="page-wrapper">
       <div class="hero-content">
         <div class="mark" aria-hidden="true">IX // EON</div>
         <p class="eyebrow">UNHEVAL · ASISTENCIA IX</p>
-        <h1>Descarga<br>ASISTENCIA IX</h1>
+        <h1>Descarga ASISTENCIA IX</h1>
         <p class="intro">
           Plataforma oficial de registro y consulta de asistencia académica. 
           Obtén la versión beta optimizada directamente para dispositivos Android.
         </p>
         <a
           class="download-button"
-          href="https://github.com/vanitas990/asistencia-ix-web/releases/download/v1.0.0-beta/app-release.apk"
+          href="https://github.com/vanitas990/asistencia-ix-web/releases/latest/download/app-release.apk"
           aria-label="Descargar ASISTENCIA IX para Android (APK Beta)"
         >
           <span aria-hidden="true">↓</span>
